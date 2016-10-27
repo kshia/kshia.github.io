@@ -29,6 +29,90 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <!-- COPY PASTA START-->
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+          google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        // var data = new google.visualization.DataTable();
+        // data.addColumn('date', 'Time of Day');
+        // data.addColumn('number', 'Rating');
+    //     data.addRows([
+    //       [new Date("9/1/16"),1789],
+    //   [new Date("9/2/16"),2374],
+    //   [new Date("9/3/16"),2482],
+    //   [new Date("9/4/16"),2254],
+    //   [new Date("9/5/16"),2406],
+    //   [new Date("9/6/16"),2643],
+    //   [new Date("9/7/16"),2157],
+    //   [new Date("9/8/16"),2568],
+    //   [new Date("9/9/16"),2222],
+    //   [new Date("9/10/16"),2195],
+    //   [new Date("9/11/16"),2508],
+    //   [new Date("9/12/16"),2413],
+    //   [new Date("9/13/16"),2347],
+    //   [new Date("9/14/16"),1936],
+    //   [new Date("9/15/16"),2359],
+    //   [new Date("9/16/16"),2429],
+    //   [new Date("9/17/16"),2242],
+    //   [new Date("9/18/16"),1970],
+    //   [new Date("9/19/16"),1356],
+    //   [new Date("9/20/16"),1854],
+    //   [new Date("9/21/16"),2381],
+    //   [new Date("9/22/16"),2547],
+    //   [new Date("9/23/16"),2516],
+    //   [new Date("9/24/16"),2248],
+    //   [new Date("9/25/16"),2095],
+    //   [new Date("9/26/16"),2492],
+    //   [new Date("9/27/16"),2190],
+    //   [new Date("9/28/16"),2236],
+    //   [new Date("9/29/16"),2194],
+    //   [new Date("9/30/16"),2079]
+    // ]);
+    //    
+        var table = $.ajax({
+                 url: "test.json",
+                 dataType: "data",
+                 async: false,
+                 }).responseText;
+
+        console.log(table);
+
+        var data = new google.visualization.DataTable(table);
+
+        var options = {
+          title: 'Number of Steps Per Day',
+          width: 900,
+          height: 500,
+          hAxis: {
+            format: 'M/d/yy',
+            gridlines: {count: 15}
+          },
+          vAxis: {
+            gridlines: {color: 'none'},
+            minValue: 0
+          }
+        };
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+        var button = document.getElementById('change');
+        button.onclick = function () {
+          // If the format option matches, change it to the new option,
+          // if not, reset it to the original format.
+          options.hAxis.format === 'M/d/yy' ?
+          options.hAxis.format = 'MMM dd, yyyy' :
+          options.hAxis.format = 'M/d/yy';
+          chart.draw(data, options);
+        };
+}
+    </script>
+
+
+
+    <!-- COPY PASTA END-->
+
 </head>
 
 <body id="page-top" class="index">
@@ -84,7 +168,9 @@
 
     <!-- Portfolio Grid Section -->
     <section id="portfolio">
-        <div class="container">
+        <div id="chart_div"></div>
+
+  <!--       <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2>Portfolio</h2>
@@ -153,11 +239,11 @@
                     </a>
                 </div>
             </div>
-        </div>
+        </div> 
     </section>
-
+-->
     <!-- About Section -->
-    <section class="success" id="about">
+    <!-- <section class="success" id="about">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -179,10 +265,10 @@
                 </div>
             </div>
         </div>
-    </section>
-
+    </section> 
+-->
     <!-- Contact Section -->
-    <section id="contact">
+<!--     <section id="contact">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -191,10 +277,10 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-8 col-lg-offset-2">
+                <div class="col-lg-8 col-lg-offset-2"> -->
                     <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
                     <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
-                    <form name="sentMessage" id="contactForm" novalidate>
+                    <!-- <form name="sentMessage" id="contactForm" novalidate>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <label>Name</label>
@@ -235,9 +321,9 @@
             </div>
         </div>
     </section>
-
+ -->
     <!-- Footer -->
-    <footer class="text-center">
+<!--     <footer class="text-center">
         <div class="footer-above">
             <div class="container">
                 <div class="row">
@@ -282,17 +368,17 @@
                 </div>
             </div>
         </div>
-    </footer>
+    </footer> -->
 
     <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
-    <div class="scroll-top page-scroll hidden-sm hidden-xs hidden-lg hidden-md">
+<!--     <div class="scroll-top page-scroll hidden-sm hidden-xs hidden-lg hidden-md">
         <a class="btn btn-primary" href="#page-top">
             <i class="fa fa-chevron-up"></i>
         </a>
-    </div>
+    </div> -->
 
     <!-- Portfolio Modals -->
-    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
+<!--    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-content">
             <div class="close-modal" data-dismiss="modal">
                 <div class="lr">
@@ -306,7 +392,9 @@
                         <div class="modal-body">
                             <h2>Project Title</h2>
                             <hr class="star-primary">
-                            <img src="img/portfolio/cabin.png" class="img-responsive img-centered" alt="">
+                        -->
+                            <!--<img src="img/portfolio/cabin.png" class="img-responsive img-centered" alt="">-->
+ <!--                           <div id="chart_div"></div>
                             <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
                             <ul class="list-inline item-details">
                                 <li>Client:
@@ -513,7 +601,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- jQuery -->
     <script src="vendor/jquery/jquery.min.js"></script>

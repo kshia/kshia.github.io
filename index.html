@@ -72,21 +72,39 @@
     //   [new Date("9/30/16"),2079]
     // ]);
     //    
+
+    //not needed for local testing
         var json = $.ajax({
                  url: "test.json",
                  dataType: "data",
                  async: false,
                  }).responseText;
 
-        console.log(json);
+        // console.log(json);        
+
+        // var json ={"activities-steps":[{"dateTime":"2016-09-27","value":"0"},{"dateTime":"2016-09-28","value":"0"},{"dateTime":"2016-09-29","value":"0"},{"dateTime":"2016-09-30","value":"0"},{"dateTime":"2016-10-01","value":"0"},{"dateTime":"2016-10-02","value":"0"},{"dateTime":"2016-10-03","value":"0"},{"dateTime":"2016-10-04","value":"0"},{"dateTime":"2016-10-05","value":"4700"},{"dateTime":"2016-10-06","value":"12978"},{"dateTime":"2016-10-07","value":"28"},{"dateTime":"2016-10-08","value":"0"},{"dateTime":"2016-10-09","value":"0"},{"dateTime":"2016-10-10","value":"0"},{"dateTime":"2016-10-11","value":"0"},{"dateTime":"2016-10-12","value":"5252"},{"dateTime":"2016-10-13","value":"9825"},{"dateTime":"2016-10-14","value":"13018"},{"dateTime":"2016-10-15","value":"12328"},{"dateTime":"2016-10-16","value":"10019"},{"dateTime":"2016-10-17","value":"4057"},{"dateTime":"2016-10-18","value":"0"},{"dateTime":"2016-10-19","value":"0"},{"dateTime":"2016-10-20","value":"0"},{"dateTime":"2016-10-21","value":"0"},{"dateTime":"2016-10-22","value":"0"},{"dateTime":"2016-10-23","value":"0"},{"dateTime":"2016-10-24","value":"0"},{"dateTime":"2016-10-25","value":"0"},{"dateTime":"2016-10-26","value":"0"},{"dateTime":"2016-10-27","value":"0"}]};
 
         obj = JSON.parse(json);
+        console.log(json);
+        
+        var steps = json["activities-steps"];
 
-        console.log(obj["activities-steps"]);//[0].dateTime);
+        console.log(steps);//[0].dateTime);
 
-        var data = new google.visualization.DataTable(table);
+        var data = new google.visualization.DataTable();
         data.addColumn('date', 'Time of Day');
         data.addColumn('number', 'Rating');
+
+        //console.log(steps[0]["dateTime"]);
+        for (var key in steps) {
+            console.log(steps[key]["dateTime"]);
+            console.log(steps[key]["value"]);
+
+            var date = new Date(steps[key]["dateTime"]);
+            data.addRow([date, Number(steps[key]["value"])]);
+        }
+
+
 
         var options = {
           title: 'Number of Steps Per Day',

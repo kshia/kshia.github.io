@@ -89,7 +89,7 @@
         
         var steps = json["activities-steps"];
 
-        console.log(steps);//[0].dateTime);
+        console.log(JSON.parse(steps));//[0].dateTime);
 
         var data = new google.visualization.DataTable();
         data.addColumn('date', 'Time of Day');

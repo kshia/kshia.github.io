@@ -29,73 +29,30 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <!-- COPY PASTA START-->
     <!--Load the AJAX API-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-          google.charts.load('current', {'packages':['corechart']});
+    google.charts.load('current', {'packages':['corechart']});
     google.charts.setOnLoadCallback(drawChart);
-      function drawChart() {
-        // var data = new google.visualization.DataTable();
-        // data.addColumn('date', 'Time of Day');
-        // data.addColumn('number', 'Rating');
-    //     data.addRows([
-    //       [new Date("9/1/16"),1789],
-    //   [new Date("9/2/16"),2374],
-    //   [new Date("9/3/16"),2482],
-    //   [new Date("9/4/16"),2254],
-    //   [new Date("9/5/16"),2406],
-    //   [new Date("9/6/16"),2643],
-    //   [new Date("9/7/16"),2157],
-    //   [new Date("9/8/16"),2568],
-    //   [new Date("9/9/16"),2222],
-    //   [new Date("9/10/16"),2195],
-    //   [new Date("9/11/16"),2508],
-    //   [new Date("9/12/16"),2413],
-    //   [new Date("9/13/16"),2347],
-    //   [new Date("9/14/16"),1936],
-    //   [new Date("9/15/16"),2359],
-    //   [new Date("9/16/16"),2429],
-    //   [new Date("9/17/16"),2242],
-    //   [new Date("9/18/16"),1970],
-    //   [new Date("9/19/16"),1356],
-    //   [new Date("9/20/16"),1854],
-    //   [new Date("9/21/16"),2381],
-    //   [new Date("9/22/16"),2547],
-    //   [new Date("9/23/16"),2516],
-    //   [new Date("9/24/16"),2248],
-    //   [new Date("9/25/16"),2095],
-    //   [new Date("9/26/16"),2492],
-    //   [new Date("9/27/16"),2190],
-    //   [new Date("9/28/16"),2236],
-    //   [new Date("9/29/16"),2194],
-    //   [new Date("9/30/16"),2079]
-    // ]);
-    //    
+    function drawChart() {
 
-    //not needed for local testing
         var json = $.ajax({
-                 url: "server/test.json",
-                 dataType: "data",
-                 async: false,
-                 }).responseText;
-
-        // console.log(json);        
-
-        // var json ={"activities-steps":[{"dateTime":"2016-09-27","value":"0"},{"dateTime":"2016-09-28","value":"0"},{"dateTime":"2016-09-29","value":"0"},{"dateTime":"2016-09-30","value":"0"},{"dateTime":"2016-10-01","value":"0"},{"dateTime":"2016-10-02","value":"0"},{"dateTime":"2016-10-03","value":"0"},{"dateTime":"2016-10-04","value":"0"},{"dateTime":"2016-10-05","value":"4700"},{"dateTime":"2016-10-06","value":"12978"},{"dateTime":"2016-10-07","value":"28"},{"dateTime":"2016-10-08","value":"0"},{"dateTime":"2016-10-09","value":"0"},{"dateTime":"2016-10-10","value":"0"},{"dateTime":"2016-10-11","value":"0"},{"dateTime":"2016-10-12","value":"5252"},{"dateTime":"2016-10-13","value":"9825"},{"dateTime":"2016-10-14","value":"13018"},{"dateTime":"2016-10-15","value":"12328"},{"dateTime":"2016-10-16","value":"10019"},{"dateTime":"2016-10-17","value":"4057"},{"dateTime":"2016-10-18","value":"0"},{"dateTime":"2016-10-19","value":"0"},{"dateTime":"2016-10-20","value":"0"},{"dateTime":"2016-10-21","value":"0"},{"dateTime":"2016-10-22","value":"0"},{"dateTime":"2016-10-23","value":"0"},{"dateTime":"2016-10-24","value":"0"},{"dateTime":"2016-10-25","value":"0"},{"dateTime":"2016-10-26","value":"0"},{"dateTime":"2016-10-27","value":"0"}]};
+           url: "server/test.json",
+           dataType: "data",
+           async: false,
+       }).responseText;
 
         obj = JSON.parse(json);
         console.log(json);
         
         var steps = obj["activities-steps"];
 
-        console.log(steps);//[0].dateTime);
+        console.log(steps);
 
         var data = new google.visualization.DataTable();
         data.addColumn('date', 'Time of Day');
         data.addColumn('number', 'Rating');
 
-        //console.log(steps[0]["dateTime"]);
         for (var key in steps) {
             console.log(steps[key]["dateTime"]);
             console.log(steps[key]["value"]);
@@ -104,8 +61,6 @@
             data.addRow([date, Number(steps[key]["value"])]);
         }
 
-
-
         var options = {
           title: 'Number of Steps Per Day',
           width: 900,
@@ -113,29 +68,25 @@
           hAxis: {
             format: 'M/d/yy',
             gridlines: {count: 15}
-          },
-          vAxis: {
+        },
+        vAxis: {
             gridlines: {color: 'none'},
             minValue: 0
-          }
-        };
-        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-        var button = document.getElementById('change');
-        button.onclick = function () {
+        }
+    };
+    var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+    chart.draw(data, options);
+    var button = document.getElementById('change');
+    button.onclick = function () {
           // If the format option matches, change it to the new option,
           // if not, reset it to the original format.
           options.hAxis.format === 'M/d/yy' ?
           options.hAxis.format = 'MMM dd, yyyy' :
           options.hAxis.format = 'M/d/yy';
           chart.draw(data, options);
-        };
-}
-    </script>
-
-
-
-    <!-- COPY PASTA END-->
+      };
+  }
+  </script>
 
 </head>
 
